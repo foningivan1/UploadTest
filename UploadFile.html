@@ -1,63 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Badge Upload</title>
-<style>
-  /* Style the form container */
-  .form-container {
-    width: 300px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-align: center;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Badge</title>
 </head>
 <body>
-<div class="form-container">
-  <h2>Upload Badge</h2>
-  <form id="badgeForm" enctype="multipart/form-data">
-    <input type="file" id="badgeInput" accept="image/png" required>
-    <button type="submit">Upload</button>
-  </form>
-</div>
-
-<script>
-document.getElementById('badgeForm').addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent form submission
-
-  // Get the uploaded image
-  var fileInput = document.getElementById('badgeInput');
-  var file = fileInput.files[0];
-
-  // Verify badge
-  if (verifyBadge(file)) {
-    alert('Badge is valid!');
-    // Additional actions if badge is valid
-  } else {
-    alert('Badge is not valid.');
-    // Additional actions if badge is not valid
-  }
-});
-
-function verifyBadge(imageFile) {
-  // Check if the file is a PNG image
-  if (!imageFile || !imageFile.type || !imageFile.type.startsWith('image/png')) {
-    return false; // Not a PNG image
-  }
-
-   //Check if the file size is 512x512
-  if (imageFile.size !== 262144) { // 512 * 512 * 4 (4 bytes per pixel)
-    return false; // Size is not 512x512
-  }
-
-  // Additional verification logic (e.g., check non-transparent pixels within a circle, color analysis)
-
-  return true; // Badge is valid
-}
-</script>
+  <input type="file" accept="image/png" onchange="verifyBadge(this)">
+  <script src="verifyBadge.js"></script>
 </body>
 </html>
